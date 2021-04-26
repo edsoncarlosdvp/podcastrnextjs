@@ -22,6 +22,7 @@ export function Player() {
                 </div>
 
                 <div className={styles.buttons}>
+
                     <button type="button">
                         <img src="/shuffle.svg" alt="Embaralhar" />
                     </button>
