@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
+import Head from 'next/head'
 
 import { format, parseISO } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
@@ -9,6 +9,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 import { api } from '../../services/api'
 import { convertDurationToTimeString } from '../../utils/convertDurationsToTimeString'
 import styles from './episode.module.scss'
+import { usePlayer } from '../../contexts/PlayerContexts'
 
 type Episode = {
     id: string
@@ -35,8 +36,13 @@ export default function Episode({ episode }: EpisodeProps) {
     //     return <p>Carregando...</p>
     // } ESSE ROUTER SERIA UTILIZADO APENAS SE O FALLBACK NÃO FOSSE BLOCKING
 
+    const { play } = usePlayer()
+
     return (
         <div className={styles.episode}>
+            <Head>
+                <title>{episode.title} | Podcastr</title>
+            </Head>
             <div className={styles.thumbnailContainer}>
                 <Link href="/">
                     <button type="button">
@@ -44,7 +50,7 @@ export default function Episode({ episode }: EpisodeProps) {
                     </button>
                 </Link>
                 <Image width={700} height={160} src={episode.thumbnail} objectFit="cover" />
-                <button type="button">
+                <button type="button" onClick={() => play(episode)}>
                     <img src="/play.svg" alt="Tocar episódio" />
                 </button>
             </div>
