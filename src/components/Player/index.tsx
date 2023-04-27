@@ -1,13 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Slider from 'rc-slider'
-import 'rc-slider/assets/index.css'
+// import 'rc-slider/assets/index.css'
+import { useEffect, useRef, useState } from 'react'
 
 import { usePlayer } from '../../contexts/PlayerContexts'
 
-import styles from './styles.module.scss'
 import { convertDurationToTimeString } from '../../utils/convertDurationsToTimeString'
-import { EPIPE } from 'node:constants'
+import styles from './styles.module.scss'
 
 
 export function Player() {
@@ -72,7 +71,7 @@ export function Player() {
                 <strong>Tocando agora</strong>
             </header>
 
-            { episode ? (
+            {episode ? (
                 <div className={styles.currentEpisode}>
                     <Image
                         width={592}
